@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html lang="es">
+        
+<head>
+     <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/libros.css">
+    
+    <title>Consultas y Subconsultas</title>
+    <!-- Agregar los enlaces a los estilos de Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+</head>
+    <body>
+        <nav class="navbar navbar-dark bg-dark">
+              <a class="navbar-brand" href="@{/listado}">
+              <img src="img/libro.png" alt="Logo" width="30" height="30"/>
+              Book-Life
+             </a>
+        </nav>
+        <div class="container content">
+            <h1 class="mt-4 mb-4" style="font-family: fantasy; color: darkblue;">Consultas Multitabla y Subconsultas</h1>  
+            <!-- Línea debajo del título -->
+            <hr style="border-top: 2px solid blue;">
+           <div class="row">
+                <div class="col col-md-12 text-right mb-4">   
+                    <a th:href="@{/listado}" class="btn btn-primary">Inicio</a>
+               </div>
+           </div>
+            
+           <div class="row mb-4">
+            <div class="col col-md-12"> 
+                <h4 style="font-family: fantasy; color: darkblue;">---Consulta multitabla(No Subconsulta)---</h4>
+                <h6 style="font-family: sans-serif; color: blueviolet">
+                -Ingresa el ID del autor, después ingresa el ID de editorial y por último da clic en el botón buscar. Mostrará los
+                 libros que compartan su autor y su editorial.
+                </h6> 
+             <!-- Formulario de búsqueda por Autor y Editorial -->
+             <form th:action="@{/librosPorAutorYEditorial}" method="get" class="form-inline mb-4 align-items-center">
+                  <div class="form-group mr-3 ">
+                      <label for="autor_id" class="mr-2">Autor ID:</label>
+                      <input type="text" class="form-control" id="autor_id" name="autor_id">
+                  </div>
+                  <div class="form-group mr-3">
+                      <label for="editorial_id" class="mr-2">Editorial ID:</label>
+                      <input type="text" class="form-control" id="editorial_id" name="editorial_id">
+                  </div>
+                   <button type="submit" class="btn btn-primary">Buscar</button>
+             </form>
+            </div>
+           </div> 
+            
+           <!-- Línea para separar -->
+           <hr style="border-top: 2px solid blue;">   
+         
+          <div class="row mb-4">
+            <div class="col col-md-12"> 
+              <h4 style="font-family: fantasy; color: darkblue;">---Consulta multitabla(Subconsulta)---</h4>
+                <h6 style="font-family: sans-serif; color:blueviolet">
+                -Ingresa la categoria y un precio, el precio que indiques hará que muestre los libros con precio mayor y la categoria deseada
+                </h6> 
+              <!-- Formulario de búsqueda por Precio y Categoría -->   
+             <form th:action="@{/categoriaPrecio}" method="get">
+                        <div class="form-group mr-3">
+                            <label for="nombreCategoria" class="mr-2">Nombre de la Categoría</label>
+                            <input type="text" class="form-control" id="nombreCategoria" name="nombreCategoria"  required>
+                        </div>
+                        <div class="form-group mr-3">
+                            <label for="precio" class="mr-2" >Precio</label>
+                            <input type="text" class="form-control" id="precio" name="precio" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                    </form>
+            </div>
+          </div> 
+          
+          <!-- Línea para separar -->
+          <hr style="border-top: 2px solid blue;">  
+          
+          <!-- Formulario de búsqueda por Idioma -->
+          <div class="row mb-4">
+            <div class="col col-md-12">
+               <h4 style="font-family: fantasy; color: darkblue;">---Consulta multitabla(Subconsulta)---</h4>
+               <h6 style="font-family: sans-serif; color: blueviolet">
+               -Ingresa el nombre del idioma que desees, mostrará los libros con ese idioma
+               </h6> 
+               <form th:action="@{/idioma}" method="get">
+                        <div class="form-group mr-3">
+                            <label for="nombreIdioma" class="mr-2">Nombre del Idioma</label>
+                            <input type="text" class="form-control" id="nombreIdioma" name="nombreIdioma" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+               </form>
+            </div>
+          </div>
+           
+          <!-- Línea para separar -->
+          <hr style="border-top: 2px solid blue;">  
+          
+          <!-- Formulario de búsqueda por nacionalidad del Autor -->
+          <div class="row mb-4">
+            <div class="col col-md-12">
+                <h4 style="font-family: fantasy; color: darkblue;">---Consulta multitabla(Subconsulta)---</h4>
+                <h6 style="font-family: sans-serif; color: blueviolet">
+                -Escribe la nacionalidad el autor(Estadounidense, Zimbabuense, Espaola). Mostrará los libros con la nacionalidad especificada de los autores
+                </h6> 
+                <!-- Formulario de búsqueda de libros por la nacionalidad del autor -->
+                <form th:action="@{/nacionalidadAutor}" method="get">
+                    <div class="form-group mr-3">
+                        <label for="nacionalidad" class="mr-2">Nacionalidad del Autor</label>
+                        <input type="text" class="form-control" id="nacionalidad" name="nacionalidad" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </form>
+            </div>
+          </div>
+          
+          <!-- Línea para separar -->
+          <hr style="border-top: 2px solid blue;">  
+          
+          <!-- Formulario de búsqueda por Categoría -->
+          <div class="row mb-4">
+            <div class="col col-md-12"> 
+             <h4 style="font-family: fantasy; color: darkblue;">---Consulta multitabla(No Subconsulta)---</h4>
+                <h6 style="font-family: sans-serif; color: blueviolet">
+                -Ingresa el Id de una categoria y da clic en el botón buscar. Mostrará los libros con la misma categoria.
+                </h6>
+             <form th:action="@{/librosPorCategoria}" method="get" class="form-inline mb-4 align-items-center">
+                <div class="form-group mr-3">
+                    <label for="categoria_id" class="mr-2">Categoría ID:</label>
+                    <input type="text" class="form-control" id="categoria_id" name="categoria_id">
+                </div>
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+             </form>
+            </div>
+          </div>
+         </div>
+        
+        <!-- Línea para separar -->
+        <hr style="border-top: 2px solid blue;">  
+        
+        <footer class="navbar navbar-dark bg-dark mt-5">
+            <p style="color: white; text-align: center; padding: 10px; margin: 0 auto;">Book-Life 2024 Copyright &copy;</p>
+        </footer>
+     </body>
+</html> 

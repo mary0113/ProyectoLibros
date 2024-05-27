@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/libros.css">
+        
+        <title>Book-Life - Editar Editorial</title>
+
+    </head>
+    <body>
+        <!-- -->
+         <!-- Define la barra de navegación que contiene el logotipo y un formulario de búsqueda-->
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" th:href="@{/listado}">
+                <img th:src="@{/img/libro.png}" width="30" height="30" alt="Logo">
+                Book-Life
+            </a>
+            <form th:action="@{/buscarEd}" class="form-inline my-2 my-lg-0">
+                <input autofocus="autofocus" name="q" class="form-control mr-sm-2" type="search" th:placeholder="${param.q}" aria-label="Search">
+                <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
+        </nav>
+       <!-- Define un contenedor principal para el contenido de la página-->
+        <div class="container mt-5 l-destacados">
+            <div class="row">
+                <div class="col col-md-12 text-right mb-4">
+                    <a th:href="@{/editoriales}" class="btn btn-outline-primary">Ver Editoriales</a>
+                    <a th:href="@{/editoriales/crear}" class="btn btn-outline-primary">Añadir Editorial</a>
+                    <a th:href="@{/listado}" class="btn btn-outline-primary">Inicio</a>
+                </div>
+                <div class="col-md-12">
+                    <!--Título principal de la página -->
+                    <h1 class="mt-5 mb-4" style="font-family: fantasy; color: darkblue;">Editar Editorial</h1>
+                    <!--Formulario que envía los datos mediante el método POST a la URL "/editoriales/guardarCambios" y utiliza el objeto "editorial" como modelo-->
+                    <form method="POST" th:action="@{/editoriales/guardarCambios}" th:object="${editorial}"> 
+                        <div class="form-group">
+                            <!--Campo de solo lectura para mostrar el ID de la editorial. -->
+                            <label for="id">ID</label>
+                            <input type="text" class="form-control" th:field="*{ed_id}" id="id" readonly>
+                        </div>
+                        <div class="form-group">
+                            <!-- Campo para editar el nombre de la editorial. -->
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control" th:field="*{ed_nombre}" id="nombre" required>
+                        </div>
+                         <!--Botón para enviar el formulario y guardar los cambios realizados en la editorial-->
+                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                    </form>
+                </div>
+            </div>
+        </div> 
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+        <footer class="navbar navbar-dark bg-dark mt-5">
+            <p style="color: white; text-align: center; padding: 10px; margin: 0 auto;">Book-Life 2024 Copyright &copy;</p>
+        </footer>
+    </body>
+</html>
